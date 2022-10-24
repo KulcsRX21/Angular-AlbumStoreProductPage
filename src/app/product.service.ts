@@ -1,8 +1,9 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
+import { Album } from './album';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class ProductService {
 
   constructor(private _http: HttpClient) { }
 
-  getAlbum(id: number) {
+  getAlbum(id: number): Observable<Album> {
     return this._http.get(this._albumUrl).map(
       (response) => response.json())
     ));
