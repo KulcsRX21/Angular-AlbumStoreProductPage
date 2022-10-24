@@ -13,8 +13,8 @@ export class ProductService {
   constructor(private _http: HttpClient) { }
 
   getAlbum(id: number) {
-    return this._http.get<AlbumArtist>(this._albumUrl).pipe(
-      map((albumArtist) => response.json())
+    return this._http.get(this._albumUrl).map(
+      (response) => response.json())
     ));
   }
 }
