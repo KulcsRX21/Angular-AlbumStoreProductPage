@@ -4,12 +4,14 @@ import { Observable } from 'rxjs/Observable';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Album } from './album';
+import { Product } from './product';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
   private _albumUrl = '../assets/album.json';
+  private _productsUrl = '../assets/products.json';
 
   constructor(private _http: HttpClient) { }
 
@@ -18,24 +20,10 @@ export class ProductService {
       (response) => <Album>response.json())
     ));
   }
-}
-
-export interface AlbumArtist {
-  id: number,
-  artist: string,
-  album: Album
-}
-
-export interface Album {
-  name: string,
-  releaseDate: Date,
-  coverImage: string,
-  tracks: Track[]
-}
-
-export interface Track {
-  trackNumber: number,
-  trackName: string,
-  trackLength: string,
-  trackPrice: number
+  
+  getProducts(): Observable<Product[]> {
+    return this._http.get(this._productsUrl).map(
+      (response) => <Product[]>response.json())
+    ));
+  }
 }
